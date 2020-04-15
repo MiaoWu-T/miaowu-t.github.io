@@ -186,6 +186,157 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://sangowen.xyz/2020/04/15/%E5%88%A9%E7%94%A8-jsproxy-%E6%90%AD%E5%BB%BA%E7%BD%91%E9%A1%B5%E4%BB%A3%E7%90%86%E7%9A%84%E4%B8%8D%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sang Owen">
+      <meta itemprop="description" content="��������С��˼���������˵�һ������">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sang Owen's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/15/%E5%88%A9%E7%94%A8-jsproxy-%E6%90%AD%E5%BB%BA%E7%BD%91%E9%A1%B5%E4%BB%A3%E7%90%86%E7%9A%84%E4%B8%8D%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B/" class="post-title-link" itemprop="url">利用 jsproxy 搭建网页代理的不完全教程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-15 11:34:14 / 修改时间：11:40:11" itemprop="dateCreated datePublished" datetime="2020-04-15T11:34:14+08:00">2020-04-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">技术相关</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>全程操作都需要用到手机和电脑。文中的代码建议一行一行复制粘贴，记得粘贴完要按回车。**</p>
+<p><strong>示例中的服务器已经停用。</strong></p>
+<h2 id="租用服务器"><a href="#租用服务器" class="headerlink" title="租用服务器"></a>租用服务器</h2><p>你需要租用一个<strong>不在中国大陆</strong>的服务器。可以在网上搜 国外 VPS 推荐。其实还有更便宜的，这里以 <a href="https://www.vultr.com/?ref=8023112" target="_blank" rel="noopener">vultr.com</a> 举例。 <strong>注意：vultr 单次最低充值$10，最低价格$5/mo，支持支付宝、微信和银联（微信支付可能用不了）</strong></p>
+<p><img src="https://uploader.shimo.im/f/9z658eczhOIJtNM1.png!thumbnail" alt="图片"></p>
+<p>输入邮箱账号和密码，点击 Create account，去邮箱点击验证链接，注册完成。</p>
+<p><img src="https://uploader.shimo.im/f/dkGaBUNWKZgK4zGD.png!thumbnail" alt="图片"></p>
+<p>点击 Billing，Alipay（支付宝），充钱。</p>
+<p>充完钱之后点 Product</p>
+<p><img src="https://uploader.shimo.im/f/A6nIsrJo0sUuLvwq.png!thumbnail" alt="图片"></p>
+<p>点右上角 + 号</p>
+<p><img src="https://uploader.shimo.im/f/QJTACgwvmskIzZtA.png!thumbnail" alt="图片"></p>
+<p>选择第一个 Cloud Compute （默认选的就是这个），然后选择服务器的位置。<strong>不推荐日本和新加坡，这两个地方的服务器很容易被墙，就算没有被墙也不太稳定（虽然延迟相对较低，但是丢包率很高）。建议选择 Seattle（西雅图）Los Angeles（洛杉矶）或 Slicon Valley（硅谷），这里以 Seattle 举例。</strong></p>
+<p><img src="https://uploader.shimo.im/f/H1tVdzzwrz08lDuG.png!thumbnail" alt="图片"></p>
+<p>选择 Server Type。默认选中 CentOS，请再点一下 CentOS，选择 CentOS 7x64（<strong>不是那个 Without SELinux</strong>)</p>
+<p><img src="https://uploader.shimo.im/f/vg7m7jl3udY0CyAz.png!thumbnail" alt="图片"></p>
+<p>选择 Server Size。默认选择的是 $10/mo，这里当然选 $5/mo。</p>
+<p><img src="https://uploader.shimo.im/f/2lvNw67imJ8RxYtI.png!thumbnail" alt="图片"></p>
+<p>接下来的选项都不用管，点 Deploy Now 即可。</p>
+<p><img src="https://uploader.shimo.im/f/0OXQg0dxIBEDq4tg.png!thumbnail" alt="图片"></p>
+<p>（第一个是已经部署好的，第二个才是新部署的）</p>
+<p>在显示 Installing 期间请稍等，直到出现 Running 时，点 Manage。</p>
+<p><img src="https://uploader.shimo.im/f/YZdqhRITxm8aukmn.png!thumbnail" alt="图片"></p>
+<p><img src="https://uploader.shimo.im/f/paFWGF5uqdwqfL8H.png!thumbnail" alt="图片"></p>
+<p>然后，同时按电脑键盘上的 Windows 徽标键 和 R 键，弹出运行。输入 cmd，按回车。</p>
+<p><img src="https://uploader.shimo.im/f/epw3iQiUzYAdtix3.png!thumbnail" alt="图片"></p>
+<p><img src="https://uploader.shimo.im/f/ePirOTtJrdwQRXr5.png!thumbnail" alt="图片"></p>
+<p>输入以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+<p>其中的 xxx.xxx.xxx.xxx 是你在刚刚那个界面得到的 IP Address，也就是图中用红色标注出来的那段数字。<br><img src="https://uploader.shimo.im/f/pzWmSBFezgczfIKr.png!thumbnail" alt="图片"></p>
+<p>因此，在本例中，就应当是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping 149.248.35.249</span><br></pre></td></tr></table></figure>
+<p>你会看到以下画面：<br><img src="https://uploader.shimo.im/f/7EM7ALPL9fU0T008.png!thumbnail" alt="图片"></p>
+<p>如果有回复，且大于等于 2-3 行都是如此，那么说明你开到的 IP 没有被墙。</p>
+<p>如果得到的都是请求超时，请稍等 2-3 分钟，重复以上操作。如果依然是请求超时，那么说明你开到的 IP 被墙了。此时，再按照上述步骤部署一个新的服务器，然后看有没有请求超时，重复这个操作（要是运气实在太差可以换个服务器的位置再试试）。开到没有被墙的 IP 后把之前所有被墙了的 IP 全部 Destroy——销毁服务器的方法见图。</p>
+<p><img src="https://uploader.shimo.im/f/ZQbNjQqV72809FJb.png!thumbnail" alt="图片"></p>
+<p>点右上角垃圾桶，点 Yes,destroy this server 即可。</p>
+<p>附：Vultr 的服务器都是按小时收费的。</p>
+<h2 id="连接至服务器"><a href="#连接至服务器" class="headerlink" title="连接至服务器"></a>连接至服务器</h2><p>你需要下载一个叫做 Xshell 的软件。链接： <a href="https://www.netsarang.com/zh/free-for-home-school/" target="_blank" rel="noopener">https://www.netsarang.com/zh/free-for-home-school/</a></p>
+<p><img src="https://uploader.shimo.im/f/bEN1dmGWY8Uzxjso.png!thumbnail" alt="图片"></p>
+<p>输入姓名（随便填），邮箱，选择 只需 Xshell，点击下载，下载链接会发送到你的邮箱。</p>
+<p>下载安装完成后，打开 Xshell。</p>
+<p><img src="https://uploader.shimo.im/f/6q98BdonJfIpQ0fT.png!thumbnail" alt="图片"></p>
+<p>点击新建</p>
+<p><img src="https://uploader.shimo.im/f/q2HgPLdNhEAqteAO.png!thumbnail" alt="图片"></p>
+<p>名称随便取，主机填上前面得到的 IP 地址。在本例中，即 149.248.35.249.点确认。</p>
+<p><img src="https://uploader.shimo.im/f/dNvxMGfYLhwLbMke.png!thumbnail" alt="图片"></p>
+<p>双击刚刚添加的会话，等待连接。</p>
+<p><img src="https://uploader.shimo.im/f/eV7zNgV8rFY39bfV.png!thumbnail" alt="图片"></p>
+<p>弹出以上对话框时，选择接受并保存（这个对话框里出现的指纹密钥不要给别人看）</p>
+<p>登录的用户名，输入 root。</p>
+<p><img src="https://uploader.shimo.im/f/0SS9HT134FEqFPb1.png!thumbnail" alt="图片"></p>
+<p>密码在刚刚 vultr 的管理界面有，点右边那个键可以一键复制，然后粘贴到第二张图的对话框即可（建议选中记住用户名和记住密码）</p>
+<p><img src="https://uploader.shimo.im/f/ZmKaWgP4Wx4FsqtY.png!thumbnail" alt="图片"></p>
+<p><img src="https://uploader.shimo.im/f/ggqqlbjN1IQa36Qi.png!thumbnail" alt="图片"></p>
+<p>等待出现[root@guest ~]#时即为连接成功。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://uploader.shimo.im/f/f2aAg9WVJawAlAr8.png!thumbnail" alt="图片"></h2><p>配置防火墙和 jsproxy<br>依次输入以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p tcp --dport 80 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 8080 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 443 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 8443 -j ACCEPT</span><br><span class="line">systemctl stop firewalld</span><br><span class="line">yum -y install iptables-services</span><br><span class="line">systemctl enable iptables</span><br><span class="line">systemctl start iptables</span><br><span class="line">service iptables save</span><br><span class="line">service iptables restart</span><br><span class="line">curl https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;EtherDream&#x2F;jsproxy&#x2F;0.1.0&#x2F;i.sh | bash</span><br></pre></td></tr></table></figure>
+<p>然后找到类似于图中的文字<br><img src="https://uploader.shimo.im/f/8NO0WBm3HAogyJzO.png!thumbnail" alt="图片"></p>
+<p>访问在线预览后面给出的域名，在本例中即 <a href="https://149.248.35.249.xip.io:8443" target="_blank" rel="noopener">https://149.248.35.249.xip.io:8443</a></p>
+<p>Done.</p>
+<p>如果觉得后面那个:8443 很别扭（而且如果访问的时候没有加上还上不去），请执行以下操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -A PREROUTING -t nat -p tcp --dport 443 -j REDIRECT --to-ports 8443</span><br><span class="line">iptables -A PREROUTING -t nat -p tcp --dport 80 -j REDIRECT --to-ports 8080</span><br><span class="line">cd &#x2F;home&#x2F;jsproxy&#x2F;server&#x2F;</span><br><span class="line">vi www.conf</span><br></pre></td></tr></table></figure>
+<p>然后会出现一大堆文字，先按一下 a，看到屏幕左下角出现– INSERT –后，找到如图的文字<br><img src="https://uploader.shimo.im/f/LsblY6bpKKA5WCx5.png!thumbnail" alt="图片"></p>
+<p>按电脑键盘方向键，移动光标至如图所示处，按退格，把’8443’改成’443’，然后按 esc 键，左下角的– INSERT –不见了，按:wq，回车即可。</p>
+<p>Done.</p>
+<h2 id="如果你愿意折腾…"><a href="#如果你愿意折腾…" class="headerlink" title="如果你愿意折腾…"></a>如果你愿意折腾…</h2><p>本教程只指出了基础操作，也就是【能用】。要是还想要一些进阶操作的话跟我说一声，我会更新的。</p>
+<p>这里给一个“不算是很进阶而且大家也不怎么会用到但是做起来很简单”的操作——自定义域名。在Lofter上面给出的实例中，你可以通过访问 <a href="https://ahghohgh3.xyz" target="_blank" rel="noopener">https://ahghohgh3.xyz</a> 进入网页代理，接下来是教程。</p>
+<p>首先你需要购买一个域名，国内比较便宜的就是 <a href="https://dnspod.cn" target="_blank" rel="noopener">dnspod.cn</a> ，腾讯云旗下。国外的就 <a href="https://godaddy.com" target="_blank" rel="noopener">GoDaddy</a> 了。白嫖域名可以前往 <a href="https://freenom.com" target="_blank" rel="noopener">Freenom</a> ，但是白嫖成功的概率很低。这里以 dnspod 举例，最近在促销，.xyz 域名一块钱一年，链接： <a href="https://www.dnspod.cn/promo/domainscarnival?source=cloud&from=domain" target="_blank" rel="noopener">https://www.dnspod.cn/promo/domainscarnival?source=cloud&amp;from=domain</a> 。</p>
+<p>购买好域名后，进入管理台，点击 DNS 管理-我的域名，点击刚刚买的域名，添加两条记录。</p>
+<p><img src="https://uploader.shimo.im/f/9PKx7jTbslApgUAt.png!thumbnail" alt="图片"></p>
+<p>记录值就是前面在 vultr 管理界面得到的 IP，其他的按照图中填，确认。</p>
+<p>Xshell 连接至服务器，输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;EtherDream&#x2F;jsproxy&#x2F;master&#x2F;i.sh | bash -s example.com</span><br></pre></td></tr></table></figure>
+<p>其中，将 example.com 替换成你的域名。在 Lofter 上公布的实例中，域名是 <a href="https://ahghohgh3.xyz" target="_blank" rel="noopener">https://ahghohgh3.xyz</a> ，所以执行的代码即为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;EtherDream&#x2F;jsproxy&#x2F;master&#x2F;i.sh | bash -s ahghohgh3.xyz</span><br></pre></td></tr></table></figure>
+<p>访问域名即可。<br>2020 年 4 月 2 日更新：在本例中，执行以上代码会使得 https 证书仅对 example.com 生效，而不会对 <a href="http://www.example.com" target="_blank" rel="noopener">www.example.com</a> 生效。例如，在访问 ahghohgh3.xyz 时不会发生异常，但如果访问 <a href="http://www.ahghohgh3.xyz" target="_blank" rel="noopener">www.ahghohgh3.xyz</a> 时就会出现类似于下图的情况。</p>
+<p><img src="https://uploader.shimo.im/f/GWqllBVv884xpvVN.png!thumbnail" alt="图片"></p>
+<p>上图以 Firefox 浏览器举例。Google Chrome 和 Safari 应该与此类似。</p>
+<p>解决方法有以下两点:</p>
+<p>1.Xshell 连接至服务器，执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;EtherDream&#x2F;jsproxy&#x2F;master&#x2F;i.sh | bash -s www.example.com</span><br></pre></td></tr></table></figure>
+<p>在本例中，即为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;EtherDream&#x2F;jsproxy&#x2F;master&#x2F;i.sh | bash -s www.ahghohgh3.xyz</span><br></pre></td></tr></table></figure>
+<p>2.前往 dnspod 的管理台，添加一条记录，记录类型为 www，记录值为域名（不带 www）<br>这样的效果就是，即便访问了 <a href="http://www.ahghohgh3.xyz" target="_blank" rel="noopener">www.ahghohgh3.xyz</a> 也会自动跳转到 ahghohgh3.xyz。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://sangowen.xyz/2020/03/13/Living-In-The-Past(1)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
