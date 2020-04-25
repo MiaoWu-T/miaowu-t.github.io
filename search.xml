@@ -229,6 +229,9 @@
 <li>_config.yml：博客配置文件。<strong>在后文称作“站点配置文件”</strong>。</li>
 </ul>
 <p>其中，我们需要使用的只有 source，theme，和 _config.yml。</p>
+<blockquote>
+<p>在后续操作中，如果没有特殊声明，在使用 Git Bash 时均在 D:/Blog/blog 下执行命令。</p>
+</blockquote>
 <h3 id="2-配置-Git-和-GitHub"><a href="#2-配置-Git-和-GitHub" class="headerlink" title="2.配置 Git 和 GitHub"></a>2.配置 Git 和 GitHub</h3><p>在 Git Bash 中输入以下命令。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;GitHub 用户名&quot;</span><br><span class="line">git config --global user.email &quot;GitHub 注册邮箱&quot;</span><br><span class="line">ssh-keygen -t rsa -C &quot;GitHub 注册邮箱&quot;</span><br></pre></td></tr></table></figure>
 
@@ -250,7 +253,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
 
 <p>在浏览器中输入 localhost:4000 即可。可以发现，Hexo 的默认主题真的非常丑。你可以自行在网上搜索 Hexo 主题。这里推荐 NexT 主题，也是我个人正在使用的。</p>
-<p>在 D:/Blog 下，打开 Git Bash，输入以下命令。</p>
+<p>输入以下命令。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next themes&#x2F;next</span><br></pre></td></tr></table></figure>
 
 <p>然后，用记事本打开 <strong>站点配置文件</strong>，查找 theme 字样，更改为 <code>theme: next</code>。</p>
@@ -271,8 +274,78 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 
 <p>然后，访问 Hexo-Sample.github.io 即可访问。</p>
-<h2 id="4-其他事项"><a href="#4-其他事项" class="headerlink" title="4.其他事项"></a>4.其他事项</h2><p>恭喜，你已经完成了大致步骤。接下来说明其他事项。</p>
-<h4 id="4-1-自定义域名"><a href="#4-1-自定义域名" class="headerlink" title="4.1 自定义域名"></a>4.1 自定义域名</h4><p>在</p>
+<h2 id="4-其他事项"><a href="#4-其他事项" class="headerlink" title="4.其他事项"></a>4.其他事项</h2><p>恭喜，你的博客已经上线。接下来说明其他事项。</p>
+<h4 id="4-1-自定义域名"><a href="#4-1-自定义域名" class="headerlink" title="4.1 自定义域名"></a>4.1 自定义域名</h4><p>在 <a href="https://sangowen.xyz/2020/04/15/利用-jsproxy-搭建网页代理的不完全教程/">利用 jsproxy 搭建网页代理的不完全教程</a> 中，我们提到了如何为域名添加记录。同样地，在控制台中添加记录，记录类型为 CNAME，记录值为 Hexo-Sample.github.io。</p>
+<p>然后，在 D:/Blog/blog/source 下，创建一个名为 CNAME 的文件，内容填写你的自定义域名。保存后，<strong>删除 .txt 后缀，使其文件类型变为 文件。</strong> </p>
+<p>输入以下命令。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>事实上，以上命令就是将文件打包，传输到 GitHub Pages 上。因此，应用更改都需要用到以上命令。</p>
+</blockquote>
+<p>完成。</p>
+<h4 id="4-2-对主题的配置"><a href="#4-2-对主题的配置" class="headerlink" title="4.2 对主题的配置"></a>4.2 对主题的配置</h4><p>非常抱歉，本人并没有过多精力去介绍主题的各项配置。每个人选择的主题各不相同，敬请自行查阅主题作者提供的配置文档。NexT 的情况较为特殊，主题作者出于某种原因不再使用简体中文写作，而是英文。NexT 6.0.0 之后的文档在 <a href="https://theme-next.org/" target="_blank" rel="noopener">NexT - Theme for Hexo</a> 上。不过，在 NexT 6.0.0 之前的文档均使用简体中文编写，且<strong>大部分配置可通用</strong>，保留在 <a href="https://theme-next.iissnan.com/" target="_blank" rel="noopener">NexT 使用文档</a> 上。</p>
+<h4 id="4-3-写作"><a href="#4-3-写作" class="headerlink" title="4.3 写作"></a>4.3 写作</h4><p><strong>请前往 <a href="https://hexo.io/zh-cn/docs/front-matter" target="_blank" rel="noopener">Front Matter | Hexo</a> ，Hexo 的官方文档学习。</strong> </p>
+<blockquote>
+<p>Front-matter 是文件最上方以 <code>---</code> 分隔的区域，用于指定个别文件的变量。</p>
+</blockquote>
+<p>事实上，Hexo 的官方文档虽然晦涩难懂，但是实际需要学习的只有 分类和标签 部分。</p>
+<h4 id="4-4-图片"><a href="#4-4-图片" class="headerlink" title="4.4 图片"></a>4.4 图片</h4><p>显然地，Lofter 的受众定当有存放图片的需求。只需要在 source 文件夹下新建一个子文件夹，专门用于存放图片，在撰写 MarkDown 文稿时，按其语法引用即可。</p>
+<p>例如，子文件夹命名为 images，向其中存放图片，名为 image1.png。</p>
+<p>则，在 MarkDown 文件中，引用图片的方式为：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">![](&#x2F;images&#x2F;image1.png)</span><br></pre></td></tr></table></figure>
+
+<p>实现效果为：</p>
+<p><img src="/images/images1.png" alt=""></p>
+<blockquote>
+<p>在 [] 间填写的内容是图片的注释。显然，这里出现的是在 利用 jsproxy 搭建网页代理的不完全教程 中出现的图片。**注意，当撰写文稿时会提醒图片不存在，这是因为以下原因：</p>
+<p>执行 <code>hexo g</code> 的过程，实际上就是程序根据站点配置文件的配置项，将 source 文件夹下的文件重排并渲染成网页。因而，在 source 文件夹下的子文件夹，上传到站点后都将变为根目录下的文件夹。</p>
+<p>例如，在本地存储的图片，路径为 D:/Blog/blog/source/images/image1.png，上传到站点后路径为 <a href="https://sangowen.xyz/images/image1.png。">https://sangowen.xyz/images/image1.png。</a></p>
+</blockquote>
+<p>不过，GitHub Pages 的访问速度很慢，图片加载的时候感觉就像是本世纪初互联网刚普及时候的样子。你可能需要寻找一个图床来存放图片，具体教程请自行上网搜索。<strong>可能</strong>可行的一个方法是，在 Lofter 上传图片后，<strong>在网页端</strong>右键图片，复制图片链接，替换。</p>
+<blockquote>
+<p>为什么说<strong>可能</strong>可行呢，因为某些网站专用的图床禁止了除规定地址以外的网站引用图片以节省流量费用。<a href="https://nicebing.com" target="_blank" rel="noopener">NiceBing</a> 即是一个例子，我曾在 Untitled(3) 文章的结尾直接引用了NiceBing 的图片下载链接，发现无法访问，点击下载链接后会出现「非法下载！」的字样。</p>
+</blockquote>
+<h3 id="5-一些思考"><a href="#5-一些思考" class="headerlink" title="5.一些思考"></a>5.一些思考</h3><p>你的博客至此已经完成基本配置，接下来就要靠你自己学习更高阶的操作了。</p>
+<blockquote>
+<p>除特殊说明，以下引用的内容均来自维基百科。以下内容可能涉及政治讨论，如果我的观点与你不同，那大概是我让你失望了。</p>
+</blockquote>
+<p>现在是 2020 年 4 月 25 日 晚上 9:00。我刚写完这篇教程，突然开始思考，究竟是什么导致我们现在重拾上个时代的个人博客，寻找一片清净的地方？</p>
+<p>最近我不知道多少次看见 Tag 里有人抱怨自己的图文被以各种理由删除。我还看见有人主动道歉，称自己就是那个喜欢举报的人。于是我心里想着，这个周末没什么事，要不写一篇自建博客的教程吧。</p>
+<p>首先需要明白的是，究竟为什么我们的创作结果会被删除。</p>
+<p>占比最大的大概是「违反相关法律法规」，说白了就是开🚗。反观国外我们可以发现，类似于 Lofter 的社区包括但不限于 AO3，Pixiv，Tumblr 等等。这些社区<strong>都允许成人内容，但是在观看成人内容前都会警示。</strong>这不禁让人思忖，为什么国外允许这些内容广泛传播（除未成年人），而国内连访问量还不到一万就要被删除呢？</p>
+<p><strong>显然地，是内容审查制度。</strong></p>
+<p>首先说明，本人<strong>并不喜欢内容审查制度。内容审查制度最开始是为了删除政治敏感内容，到最后范围越来越大，以至于一些根本没有表达政治倾向的内容也会被删除。</strong></p>
+<p>你得明白色情究竟是否违反法律。前往维基百科搜索 什么不是色情，你会发现，大部分认为色情非法的国家都是亚洲的发展中国家。而北美和南美除了儿童色情和非自愿的色情以外，基本都是合法的。</p>
+<p>然后，你得知道，色情和淫秽的区别。</p>
+<blockquote>
+<p><strong>淫秽</strong>（Obscenity）指和性有关的作品过于露骨，以至于严重危害当时的社会道德标准。此一词语常表达强烈道德上的反感，例如淫秽利润（obscene profit）或是淫秽战争（the obscenity of war）。</p>
+</blockquote>
+<p>淫秽相较于色情，具有广泛的社会危害性。</p>
+<p>法律所制止的也是「具有广泛社会危害性的行为」。</p>
+<blockquote>
+<p>中国文化产业虽体量巨大，但深受中国政府影响。政府对媒体及各类文化产品实行严格管制，同时未实行分级制度。在现行司法体系下，成年人无合法接触色情作品的权力。虽然法律严苛、网络审查亦日渐收窄，但中国社会仍处于网络色情泛滥的状态。以避免未成年人接触色情产品为目的，未成年人家长将查禁网络色情视为政府职责，认同政府使用网络屏蔽手段查禁色情产品。同时，由于中国法律许可的文化产品须以“幼儿”可接受的水平为标准，除成年人权利被禁锢于“幼儿”标准的不满外，亦使普遍民众对色情文化产品的定性极为宽泛。媒体报道中，部分未成年人家长将快看、抖音归于色情媒介。媒体将此类亚文化产品列入危害未成年人的“精神鸦片”，要求政府查禁此类产品。日常行政中，中国政府亦将查禁网络色情的行动归为自己保护未成年人的政绩之一。</p>
+</blockquote>
+<p>对自由的向往会使得限制愈加严格，人们愈加感兴趣。对性的错误认知可能是问题所在，毕竟我父母在我小时候看到男女搂搂抱抱的时候都会让我回避。而这一错误认知的根源可能在于我们的、亚洲人的传统观念。不可置否的是，我国的思想文化教育并不先进，而当局显然急于加强学科素养教育。私以为，当代中国若是能加强思想素质教育，达到甚至超过欧美国家的水平，发展速度定当加倍。</p>
+<p>不过这样以来，可能会搬起石头砸自己的脚。</p>
+<hr>
+<p>再说举报。</p>
+<blockquote>
+<p>必须加强对权力运行的制约和监督，让人民监督权力，让权力在阳光下运行，把权力关进制度的笼子。——人民教育出版社《道德与法治》</p>
+</blockquote>
+<p>我国民主制度与西方国家的最大差异在于，西方国家的每一个人都能直接参与到选举中，也就是「直接选举」。我国的人民代表大会制，顾名思义，人民选举出人民代表，再由人民代表进行民主选举，也就是「间接选举」。</p>
+<p>如上所述，我国的思想文化教育并不先进，这也导致在我国实行全面直接选举困难重重。最直接的缺点就是，基层民众的意见和建议无法非常明确、非常清楚地传递到最高层领导级。</p>
+<p>显然，在引用部分中，要求人民监督权力的行使，这一宗旨是正确的。但如果监督权力行使的人是一小部分人，如果监督权不能广泛地被人民共同所有，这一制度反而可能会贻害无穷。执行权力的人并没有问题，有问题的是要求其执行权力，也就是拥有「要求政府官员执行权力的权力」的那些人。</p>
+<p>这是在「为什么能被举报成功」上的问题。</p>
+<p>接下来说「为什么要举报」的问题。</p>
+<p>还记得我在文章最开始建议你先看的文章吗？中文互联网中的讨论正在消亡，不理智的因素越发增多。</p>
+<blockquote>
+<p>讨论的起点是每个人各抒己见，尊重他人。但是在中文互联网，变成了互相洗脑的过程，可惜每个人都坚持自己的观点，谁也说不过谁。于是从某一方谩骂开始这场对话终究没有任何意义。</p>
+<p>往深了点说，究竟为什么「都坚持自己的意见」呢？私以为人们潜意识里总是觉得「要是我被人反驳到没法辩解」，或者意识到自己的错误时总是会觉得很「丢脸」，「很没面子」。这种挫败感逐渐变成愤怒，对自己无能为力的愤怒。因为人总是喜欢从统治——思想和肉体上的统治，以及「在他人被迫承认他自己是错的，而我是对的，打了他之前坚持自己意见时的脸，事后我还要幸灾乐祸」中获得愉悦感。而在肉体上的统治不可能的前提、国内大环境的影响下，这种无意义的讨论越来越多。但是平台和无良自媒体不在乎，利益驱使他需要通过自我阉割、发沸腾文、利用民众情绪来赚取流量和金钱。</p>
+</blockquote>
+<p>这是我在那篇文章下的评论。同样地，把「坚持自己的意见」更替为「消除异见」即可。不过，在 举报 中，连最基础的讨论都没有了。</p>
+<hr>
+<p>End.</p>
 ]]></content>
       <categories>
         <category>技术相关</category>
