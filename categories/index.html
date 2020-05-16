@@ -22,12 +22,12 @@
 
   <meta name="description" content="��������С��˼���������˵�һ������">
 <meta property="og:type" content="website">
-<meta property="og:title" content="categories">
+<meta property="og:title" content="归档">
 <meta property="og:url" content="https://sangowen.xyz/categories/">
 <meta property="og:site_name" content="Sang Owen&#39;s Blog">
 <meta property="og:description" content="��������С��˼���������˵�һ������">
 <meta property="article:published_time" content="2020-04-11T18:41:59.000Z">
-<meta property="article:modified_time" content="2020-04-11T18:42:29.909Z">
+<meta property="article:modified_time" content="2020-05-16T10:51:07.673Z">
 <meta property="article:author" content="Sang Owen">
 <meta name="twitter:card" content="summary">
 
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>categories | Sang Owen's Blog
+  <title>归档 | Sang Owen's Blog
 </title>
   
 
@@ -195,7 +195,7 @@
     <div class="post-block" lang="zh-Hans">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">categories
+<h1 class="post-title" itemprop="name headline">归档
 </h1>
 
 <div class="post-meta">
@@ -232,6 +232,7 @@
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -325,6 +326,35 @@
   
 
   
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'm1tBCs9qDiqWc6JsEwR5Akrs-MdYXbMMI',
+      appKey     : 'pnThJqH5yxpGMe2kykLh0VUD',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 
 </body>
 </html>
