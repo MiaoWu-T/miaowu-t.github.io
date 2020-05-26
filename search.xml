@@ -108,7 +108,7 @@
 </blockquote>
 <p>不过，GitHub Pages 的访问速度很慢，图片加载的时候感觉就像是本世纪初互联网刚普及时候的样子。你可能需要寻找一个图床来存放图片，具体教程请自行上网搜索。<strong>可能</strong>可行的一个方法是，在 Lofter 上传图片后，<strong>在网页端</strong>右键图片，复制图片链接，替换。</p>
 <blockquote>
-<p>为什么说<strong>可能</strong>可行呢，因为某些网站专用的图床禁止了除规定地址以外的网站引用图片以节省流量费用。<a href="https://nicebing.com" target="_blank" rel="noopener">NiceBing</a> 即是一个例子，我曾在 Untitled(3) 文章的结尾直接引用了NiceBing 的图片下载链接，发现无法访问，点击下载链接后会出现「非法下载！」的字样。</p>
+<p>为什么说<strong>可能</strong>可行呢，因为某些网站专用的图床禁止了除规定地址以外的网站引用图片以节省流量费用。<a href="https://nicebing.com" target="_blank" rel="noopener">NiceBing</a> 即是一个例子，我曾在 Untitled(3) 文章的结尾直接引用了 NiceBing 的图片下载链接，发现无法访问，点击下载链接后会出现「非法下载！」的字样。</p>
 </blockquote>
 <h3 id="5-一些思考"><a href="#5-一些思考" class="headerlink" title="5.一些思考"></a>5.一些思考</h3><p>你的博客至此已经完成基本配置，接下来就要靠你自己学习更高阶的操作了。</p>
 <blockquote>
